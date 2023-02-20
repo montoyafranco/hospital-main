@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 @RestController
 @RequestMapping("patient")
 @CrossOrigin(origins = "*")
@@ -32,12 +31,10 @@ public class PatientController {
     private HttpStatus httpStatus = HttpStatus.OK;
 
     @PostMapping("create")
-    public ResponseEntity<Response> createPatient(@RequestBody @Validated Patient patient, BindingResult bindingResult){
+    public ResponseEntity<Response> createPatient(@RequestBody @Validated Patient patient, BindingResult bindingResult) {
         response.restart();
         if (bindingResult.hasErrors()) {
-
             Map errorMap = mainController.getErrorMap(bindingResult);
-
 
             response.error = true;
             response.data = errorMap;
@@ -56,18 +53,14 @@ public class PatientController {
                 response = respuestaExceptionDTO.getResponse();
                 httpStatus = respuestaExceptionDTO.getHttpStatus();
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 RespuestaExceptionDTO respuestaExceptionDTO = mainController.getInternalErrorMessage(e);
                 response = respuestaExceptionDTO.getResponse();
                 httpStatus = respuestaExceptionDTO.getHttpStatus();
 
             }
-
-
         }
-        return new ResponseEntity<>(response,httpStatus);
-
-
+        return new ResponseEntity<>(response, httpStatus);
     }
 
 
