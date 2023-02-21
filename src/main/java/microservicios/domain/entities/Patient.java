@@ -2,11 +2,15 @@ package microservicios.domain.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "patient")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +25,9 @@ public class Patient {
 
     private Integer age;
 
-
+    public Patient(String name, Integer age) {
+        this.id_patient = getId_patient();
+        this.name = name;
+        this.age = age;
+    }
 }
